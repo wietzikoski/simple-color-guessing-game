@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Part 2</title>
+  </head>
+  <body onload="do_game()">
+    <script type="text/javascript">
+    var correctGuess,
+        colors,
+        guess_input,
+        target;
+
+    var myBody = document.getElementsByTagName("body")[0];
+    var finished = false;
+    var guesses = 0;
+
+    function do_game(){
+        colors = ["blue", "cyan", "gold", "gray", "green", "magenta", "orange", "red", "white", "yellow"];
+        target = colors[Math.floor(Math.random() * colors.length)];
+
+        while(!finished){
+          guess_input = prompt("I am thinking of one of these colors: " + colors.join(", ")+ ". \n \n What color am I thinking of?");
+          guesses += 1;
+          check_guess();
+        }
+
+        function check_guess(){
+          if(colors.indexOf(guess_input) == - 1){
+            
+            alert("Sorry, I don't recognize your color.\n\nPlease guess again.");
+            return false;
+          }
+
+          if(colors.indexOf(guess_input) > colors.indexOf(target)) {
+            alert("Sorry, your guess is alphebetically higher than mine! \n \n Please guess again.");
+            return false;
+          }
+
+          if(colors.indexOf(guess_input) < colors.indexOf(target)) {
+            alert("Sorry, your guess is alphebetically lower than mine! \n \n Please guess again.");
+            return false;
+          }
+
+          else {
+            myBody.style.background = target;
+            alert("Congratulations! You have guessed the color! \n \n It took you " + guesses + " guess(es) to finish the game.");
+            finished = true;
+            
+          }
+        }
+    }
+    </script>
+  </body>
+</html>
